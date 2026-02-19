@@ -10,9 +10,6 @@ cmds = [
   'php artisan config:cache',
   'php artisan route:cache',
   'php artisan view:cache',
-  'php artisan config:cache',
-  'php artisan route:cache',
-  'php artisan view:cache',
   'php artisan migrate --force',
   'mkdir -p storage/framework/sessions',
   'mkdir -p storage/framework/views',
@@ -22,4 +19,3 @@ cmds = [
 
 [start]
 cmd = 'frankenphp run --config /Caddyfile'
-
