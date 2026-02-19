@@ -29,13 +29,11 @@ class MatchesController extends Controller
             ->filter(fn($m) => str_contains($m['name'], "T20 World Cup"))
             ->values() 
             ->all();
-        dd($matches);
 
         return Inertia::render('Home', [
             'matches' => $matches,
         ]);
     }
-
     
     /**
      * Show the form for creating a new resource.
