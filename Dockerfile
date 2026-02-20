@@ -8,17 +8,13 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-COPY . .
+COPY cricket.com/ .
 
 RUN ls -la
 
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 RUN npm install && npm run build
-
-RUN php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
 
 EXPOSE 8000
 
