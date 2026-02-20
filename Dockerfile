@@ -3,27 +3,18 @@ FROM php:8.2-fpm
 WORKDIR /var/www/html
 
 RUN apt-get update && apt-get install -y \
-    git \
-    zip unzip \
-    curl \
-    libzip-dev \
-    libonig-dev \
-    libpng-dev \
-    libpq-dev \
-    cron \
-    npm \
-    nodejs \
+    git zip unzip curl libzip-dev libonig-dev libpng-dev libpq-dev cron npm nodejs \
     && docker-php-ext-install pdo_mysql mbstring zip exif pcntl gd
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader
+RUN ls -la
 
-RUN php artisan key:generate
+RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-RUN npm install && npm run prod
+RUN npm install && npm run build
 
 RUN php artisan config:cache \
     && php artisan route:cache \
